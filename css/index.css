@@ -1,0 +1,20 @@
+#help {
+	font-size: 24px;
+}
+
+.bookmarklink span {
+	display: none;
+}
+
+.bookmarklink::before {
+	color: white;
+	content: 'Arraste-me para sua barra de favoritos'
+}
+
+.pcr-button:after {
+	border: #000 2px solid;
+}
+
+#customCSS {
+	font-family: monospace;
+}
