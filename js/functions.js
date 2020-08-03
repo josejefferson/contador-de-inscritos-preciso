@@ -1,5 +1,5 @@
 const ytcountloaded = true;
-const defaultAPIKey = "AIzaSyAwdIyQX7-nEsdG-Fs-A8uWuFxmROXJi9w";
+const defaultAPIKey = "AIzaSyDpYBLktHtAzpr4RLpXouyIPiJUbziU85c";
 var defaultTitle = document.title;
 var subsTimer;
 var googleAuthUser = 0;

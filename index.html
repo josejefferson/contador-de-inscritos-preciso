@@ -26,17 +26,20 @@
 	<meta name="twitter:title" content="Contador de inscritos para YouTube">
 	<meta name="twitter:description" content="Contador de inscritos preciso para YouTube personalizável">
 	<meta name="twitter:url" content="https://josejefferson.github.io/contador-de-inscritos-preciso/">
-	<meta name="twitter:image" content="https://josejefferson.github.io/contador-de-inscritos-preciso/icons/background.png">
+	<meta name="twitter:image"
+		content="https://josejefferson.github.io/contador-de-inscritos-preciso/icons/background.png">
 
 	<title>Contador de inscritos preciso para YouTube</title>
 	<link rel="shortcut icon" href="favicon.png" type="image/png">
 	<link rel="manifest" href="manifest.json">
 	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/preview.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" />
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.7.95/css/materialdesignicons.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/odometer@0.4.8/themes/odometer-theme-default.css">
 </head>
 
 <body>
@@ -273,13 +276,52 @@
 					placeholder="Insira o CSS aqui..."></textarea>
 			</div>
 
-			<button type="button" class="btn btn-info mt-1" onclick="presetDesktop()"><i class="mdi mdi-cogs"></i>
-				Preset Desktop</button>
-			<button type="button" class="btn btn-info mt-1" onclick="presetMobile()"><i class="mdi mdi-cogs"></i>
-				Preset Mobile</button>
+			<div class="row">
+				<div class="col-12 col-md-8 col-lg-6 mt-3">
+					<h3>Prévia (desktop)</h3>
+					<div class="preview previewDesktop">
+						<div class="subCounterContainer">
+							<div class="chanDetails">
+								<img class="chanThumb shadow-lg" draggable="false">
+								<div class="name">YouTube</div>
+							</div>
+							<div class="countContainer">
+								<div class="subCounterDesktop">
+									12345678</div>
+							</div>
+						</div>
+						<div class="backgroundImage"></div>
+					</div>
+				</div>
 
-			<button type="reset" class="btn btn-secondary mt-1" onclick="window.setTimeout(resetForm, 1);"><i
-					class="mdi mdi-history"></i> Resetar</button>
+				<div class="col-12 col-md-4 col-lg-3 mt-3">
+					<h3>Prévia (mobile)</h3>
+					<div class="preview previewMobile">
+						<div class="subCounterContainer">
+							<div class="chanDetails">
+								<img class="chanThumb shadow-lg" draggable="false">
+								<div class="name">YouTube</div>
+							</div>
+							<div class="countContainer">
+								<div class="subCounterMobile">
+									12345678</div>
+							</div>
+						</div>
+						<div class="backgroundImage"></div>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-12 col-lg-3 mt-3">
+					<button type="button" class="btn btn-info mt-1" onclick="presetDesktop()"><i class="mdi mdi-cogs"></i>
+						Preset Desktop</button>
+					<button type="button" class="btn btn-info mt-1" onclick="presetMobile()"><i class="mdi mdi-cogs"></i>
+						Preset Mobile</button>
+
+					<button type="reset" class="btn btn-secondary mt-1" onclick="window.setTimeout(resetForm, 1);"><i
+							class="mdi mdi-history"></i> Resetar</button>
+				</div>
+			</div>
+
 		</form>
 	</div>
 
@@ -287,7 +329,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.js"></script>
 	<script src="js/index.js"></script>
+	<script src="js/preview.js"></script>
 
 </body>
 
