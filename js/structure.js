@@ -120,5 +120,5 @@ const structure = `<div id="loadingScreen">
 	</span>
 </div>`
 
-$('head').html(metas + dependencies + styles)
+$('head').html(metadata + dependencies + styles)
 $('body').html(structure)
