@@ -1,3 +1,7 @@
+const metadata = `
+<meta name="viewport" content="width=device-width">
+`
+
 const dependencies = `
 <link rel="shortcut icon" href="" type="image/png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -116,5 +120,5 @@ const structure = `<div id="loadingScreen">
 	</span>
 </div>`
 
-$('head').html(dependencies + styles)
+$('head').html(metas + dependencies + styles)
 $('body').html(structure)
