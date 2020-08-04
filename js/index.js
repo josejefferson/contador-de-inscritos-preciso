@@ -89,6 +89,8 @@ function getOptions() {
 		thumbMargin: $('#thumbMargin').val(),
 		nameSize: $('#nameSize').val(),
 		counterSize: $('#counterSize').val(),
+		nameFont: $('#nameFont').val(),
+		counterFont: $('#counterFont').val(),
 		counterMargin: $('#counterMargin').val(),
 		nameColor: $('#nameColor').val(),
 		counterColor: $('#counterColor').val(),

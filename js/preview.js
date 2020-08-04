@@ -22,7 +22,8 @@ function updatePreview() {
 	$('.preview.previewDesktop .countContainer').css('margin-top', `calc(((${options.counterMargin} * 100) / 1920) * 1%)`)
 	$('.preview.previewMobile .countContainer').css('margin-top', `calc(((${options.counterMargin} * 100) / 360) * 1%)`)
 	$('.preview .odometer').css({
-		"color": options.counterColor
+		"color": options.counterColor,
+		"font-family": options.counterFont
 	})
 
 	const ndpv = $('.previewDesktop').innerWidth()
@@ -48,6 +49,7 @@ function updatePreview() {
 	$('.preview .imgLeft .chanThumb').css('margin-right', `${options.thumbMargin}px`)
 	$('.preview .name').css({
 		"color": options.nameColor,
+		"font-family": options.nameFont
 	})
 }
 
