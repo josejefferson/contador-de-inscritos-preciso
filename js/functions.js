@@ -1,5 +1,5 @@
 const ytcountloaded = true;
-const defaultAPIKey = "AIzaSyDpYBLktHtAzpr4RLpXouyIPiJUbziU85c";
+const defaultAPIKey = "QUl6YVN5RHBZQkxrdEh0QXpwcjRSTHBYb3V5SVBpSlViemlVODVj";
 var defaultTitle = document.title;
 var subsTimer;
 var googleAuthUser = 0;
@@ -52,7 +52,7 @@ function repairParams() {
 async function getChannelData() {
 	$('#loadingMessage').text('Procurando informações do canal')
 
-	await $.getJSON(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || defaultAPIKey}`, data => {
+	await $.getJSON(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`, data => {
 		if (data["pageInfo"]["totalResults"] != 0) {
 			info.name = data['items'][0]['snippet']['title'];
 			info.chanThumb = data['items'][0]['snippet']['thumbnails']['medium']['url'];
