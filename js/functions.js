@@ -191,7 +191,7 @@ async function getSubs() {
 	} catch (err) {
 		if (err == 403) { googleAuthUser++; getSubs() } else {
 			document.title = defaultTitle
-			showError('Ocorreu um erro ao verificar número de inscritos', 'Tente recarregar a página')
+			showError('Ocorreu um erro ao verificar número de inscritos', 'Tente verificar sua conexão com a internet ou recarregar a página')
 		}
 	}
 }

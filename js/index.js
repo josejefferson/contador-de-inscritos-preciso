@@ -18,13 +18,15 @@ const presets = {
 			"#thumbSize": "200",
 			"#thumbMargin": "10",
 			"#nameSize": "50",
+			"#nameFont": "",
 			"#nameColor": "#ffffff",
 			"#counterSize": "120",
+			"#counterFont": "",
 			"#counterMargin": "100",
 			"#counterColor": "#ffffff"
 		}
 	},
-
+	
 	'mobile': {
 		checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
 		values: {
@@ -36,8 +38,10 @@ const presets = {
 			"#thumbSize": "150",
 			"#thumbMargin": "10",
 			"#nameSize": "30",
+			"#nameFont": "",
 			"#nameColor": "#ffffff",
 			"#counterSize": "50",
+			"#counterFont": "",
 			"#counterMargin": "30",
 			"#counterColor": "#ffffff"
 		}
