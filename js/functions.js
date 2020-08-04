@@ -193,6 +193,7 @@ async function getSubs() {
 			document.title = defaultTitle
 			showError('Ocorreu um erro ao verificar número de inscritos', 'Tente verificar sua conexão com a internet ou recarregar a página')
 		}
+		subCounterTimer = window.setTimeout(getSubs, 10000)
 	}
 }
 
