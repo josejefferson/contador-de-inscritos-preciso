@@ -75,7 +75,7 @@ function applyPreset(presetName, skipConfirm = false) {
 }
 
 if (window.innerWidth <= 768) {
-	presetMobile(true)
+	applyPreset('mobile', true)
 	$('.bookmarklink').removeClass('animate__animated')
 }
 

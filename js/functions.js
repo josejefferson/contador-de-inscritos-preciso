@@ -14,6 +14,7 @@ new Odometer({ el: document.querySelector('.odometer') })
 $('body').dblclick(fullscreen);
 $('body').contextmenu(() => {
 	$('body').toggleClass('cursorHidden')
+	return false
 });
 $("#errorGetSubs").click(() => alert("Ocorreu um erro ao atualizar o contador de inscritos. Talvez o contador esteja desatualizado"));
 
