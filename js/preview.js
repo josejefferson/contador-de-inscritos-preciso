@@ -53,7 +53,7 @@ function updatePreview() {
 
 let currentValue = 12345678
 function updateCounter() {
-	currentValue += Math.floor(Math.random() * 10)
+	currentValue += -2 + Math.floor(Math.random() * 20)
 	subCounterMobile.update(currentValue)
 	subCounterDesktop.update(currentValue)
 	window.setTimeout(updateCounter, 3000)

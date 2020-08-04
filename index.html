@@ -93,8 +93,7 @@
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input bgType" name="bgType" id="bgTypeSolid" value="solid">
 							<label class="custom-control-label" for="bgTypeSolid">Cor sólida</label>
-							<div id="bgColor-picker"></div>
-							<input type="hidden" name="bgColor" id="bgColor" value="#000000">
+							<input type="color" class="form-control" name="bgColor" id="bgColor" value="#000000">
 						</div>
 						<div class="custom-control custom-radio">
 							<input type="radio" class="custom-control-input bgType" name="bgType" id="bgTypeURL" value="url">
@@ -107,34 +106,34 @@
 				<div class="col-md-6 pr-md-5 sm-12">
 					<div class="form-group">
 						<label class="h6" for="bgOpacity"><i class="mdi mdi-opacity"></i> Opacidade do fundo</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="bgOpacity" id="bgOpacity" min="0" max="100" step="1"
 									value="50" v-model="bgOpacity">
 							</div>
-							<div class="col-3">{{bgOpacity + '%'}}</div>
+							<div class="col-3"><span class="inputValue"></span>%</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="h6" for="bgOpacity"><i class="mdi mdi-blur"></i> Desfoque do fundo</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="bgBlur" id="bgBlur" min="0" max="30" step="1" value="15"
 									v-model="bgBlur">
 							</div>
-							<div class="col-3">{{bgBlur + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="h6" for="vignette"><i class="mdi mdi-panorama-wide-angle"></i> Vinheta</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="vignette" id="vignette" min="0" max="150" step="1"
 									value="0" v-model="vignette">
 							</div>
-							<div class="col-3">{{vignette + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 				</div>
@@ -161,12 +160,12 @@
 					<div class="form-group">
 						<label class="h6" for="thumbSize"><i class="mdi mdi-resize"></i> Tamanho da imagem do
 							canal</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="thumbSize" id="thumbSize" min="0" max="300" step="1"
 									value="200" v-model="thumbSize">
 							</div>
-							<div class="col-3">{{thumbSize + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 				</div>
@@ -189,12 +188,12 @@
 					<div class="form-group">
 						<label class="h6" for="thumbMargin"><i class="mdi mdi-arrow-expand-vertical"></i> Margem da
 							imagem do canal</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="thumbMargin" id="thumbMargin" min="0" max="100" step="1"
 									value="10" v-model="thumbMargin">
 							</div>
-							<div class="col-3">{{thumbMargin + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 				</div>
@@ -207,36 +206,36 @@
 					<div class="form-group">
 						<label class="h6" for="nameSize"><i class="mdi mdi-resize"></i> Tamanho do nome do
 							canal</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="nameSize" id="nameSize" min="0" max="200" step="1"
 									value="50" v-model="nameSize">
 							</div>
-							<div class="col-3">{{nameSize + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="h6" for="counterSize"><i class="mdi mdi-resize"></i> Tamanho do contador de
 							inscritos</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="counterSize" id="counterSize" min="0" max="300" step="1"
 									value="120" v-model="counterSize">
 							</div>
-							<div class="col-3">{{counterSize + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="h6" for="counterMargin"><i class="mdi mdi-arrow-expand-vertical"></i> Margem
 							do contador de inscritos</label>
-						<div class="row">
+						<div class="row input">
 							<div class="col-9">
 								<input type="range" class="custom-range" name="counterMargin" id="counterMargin" min="0" max="300"
 									step="1" value="100" v-model="counterMargin">
 							</div>
-							<div class="col-3">{{counterMargin + 'px'}}</div>
+							<div class="col-3"><span class="inputValue"></span>px</div>
 						</div>
 					</div>
 				</div>
@@ -244,14 +243,12 @@
 				<div class="col-md-6 pr-md-5 sm-12">
 					<div class="form-group">
 						<label class="h6"><i class="mdi mdi-palette"></i> Cor do nome do canal</label>
-						<div id="nameColor-picker"></div>
-						<input type="hidden" name="nameColor" id="nameColor" value="#ffffff">
+						<input type="color" class="form-control" name="nameColor" id="nameColor" value="#ffffff">
 					</div>
 
 					<div class="form-group">
 						<label class="h6"><i class="mdi mdi-palette"></i> Cor do contador de inscritos</label>
-						<div id="counterColor-picker"></div>
-						<input type="hidden" name="counterColor" id="counterColor" value="#ffffff">
+						<input type="color" class="form-control" name="counterColor" id="counterColor" value="#ffffff">
 					</div>
 
 					<div class="form-group">
@@ -274,6 +271,7 @@
 				<h6>CSS personalizado</h6>
 				<textarea class="form-control" name="customCSS" id="customCSS" rows="10"
 					placeholder="Insira o CSS aqui..."></textarea>
+				<small>O CSS personalizado não está disponível na prévia</small>
 			</div>
 
 			<div class="row">
@@ -312,12 +310,12 @@
 				</div>
 
 				<div class="col-12 col-md-12 col-lg-3 mt-3">
-					<button type="button" class="btn btn-info mt-1" onclick="presetDesktop()"><i class="mdi mdi-cogs"></i>
+					<button type="button" class="btn btn-info w-100 mt-1" onclick="applyPreset('desktop')"><i class="mdi mdi-cogs"></i>
 						Preset Desktop</button>
-					<button type="button" class="btn btn-info mt-1" onclick="presetMobile()"><i class="mdi mdi-cogs"></i>
+					<button type="button" class="btn btn-info w-100 mt-1" onclick="applyPreset('mobile')"><i class="mdi mdi-cogs"></i>
 						Preset Mobile</button>
 
-					<button type="reset" class="btn btn-secondary mt-1" onclick="window.setTimeout(resetForm, 1);"><i
+					<button type="reset" class="btn btn-secondary w-100 mt-1"><i
 							class="mdi mdi-history"></i> Resetar</button>
 				</div>
 			</div>
@@ -327,8 +325,6 @@
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/preview.js"></script>

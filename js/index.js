@@ -6,78 +6,67 @@ $('.copycode').click(() => {
 	alert('Copiado para a área de transferência')
 })
 
-const presetDesktopValues = {
-	checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
-	values: {
-		"#bgURL": "",
-		"#bgOpacity": "50",
-		"#bgBlur": "15",
-		"#vignette": "0",
-		"#thumbSize": "200",
-		"#thumbMargin": "10",
-		"#nameSize": "50",
-		"#counterSize": "120",
-		"#counterMargin": "100"
+const presets = {
+	'desktop': {
+		checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
+		values: {
+			"#bgURL": "",
+			"#bgColor": "#000000",
+			"#bgOpacity": "50",
+			"#bgBlur": "15",
+			"#vignette": "0",
+			"#thumbSize": "200",
+			"#thumbMargin": "10",
+			"#nameSize": "50",
+			"#nameColor": "#ffffff",
+			"#counterSize": "120",
+			"#counterMargin": "100",
+			"#counterColor": "#ffffff"
+		}
+	},
+
+	'mobile': {
+		checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
+		values: {
+			"#bgURL": "",
+			"#bgColor": "#000000",
+			"#bgOpacity": "50",
+			"#bgBlur": "15",
+			"#vignette": "0",
+			"#thumbSize": "150",
+			"#thumbMargin": "10",
+			"#nameSize": "30",
+			"#nameColor": "#ffffff",
+			"#counterSize": "50",
+			"#counterMargin": "30",
+			"#counterColor": "#ffffff"
+		}
 	}
 }
 
-const presetMobileValues = {
-	checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
-	values: {
-		"#bgURL": "",
-		"#bgOpacity": "50",
-		"#bgBlur": "15",
-		"#vignette": "0",
-		"#thumbSize": "150",
-		"#thumbMargin": "10",
-		"#nameSize": "30",
-		"#counterSize": "50",
-		"#counterMargin": "30"
-	}
+$(document).ready(updateInputValues)
+
+function updateInputValues() {
+	$('.custom-range').each(function () {
+		const value = $(this).val()
+		$(this).closest('.input').find('.inputValue').text(value)
+	})
 }
 
-var vue = new Vue({
-	el: 'body',
-	data: {
-		bgOpacity: $('#bgOpacity').val(),
-		bgBlur: $('#bgBlur').val(),
-		vignette: $('#vignette').val(),
-		thumbSize: $('#thumbSize').val(),
-		thumbMargin: $('#thumbMargin').val(),
-		nameSize: $('#nameSize').val(),
-		counterSize: $('#counterSize').val(),
-		counterMargin: $('#counterMargin').val()
-	}
-});
+$('.custom-range').on('change mousemove', function () {
+	const value = $(this).val()
+	$(this).closest('.input').find('.inputValue').text(value)
+})
 
-function resetForm() {
-	vue.bgOpacity = $('#bgOpacity').val();
-	vue.bgBlur = $('#bgBlur').val();
-	vue.vignette = $('#vignette').val();
-	vue.thumbSize = $('#thumbSize').val();
-	vue.thumbMargin = $('#thumbMargin').val();
-	vue.nameSize = $('#nameSize').val();
-	vue.counterSize = $('#counterSize').val();
-	vue.counterMargin = $('#counterMargin').val();
-	bgColor.setColor('#000000');
-	nameColor.setColor('#ffffff');
-	counterColor.setColor('#ffffff');
-	updatePreview();
-}
-
-function presetDesktop(skipConfirm = false) {
-	if (skipConfirm || confirm("AVISO: Se você aplicar este preset, todas as suas personalizações serão perdidas. Continuar?")) {
-		presetDesktopValues.checks.forEach(id => $(id).prop("checked", true));
-		for (id in presetDesktopValues.values) { $(id).val(presetDesktopValues.values[id]) }
-		resetForm();
-	}
-}
-
-function presetMobile(skipConfirm = false) {
-	if (skipConfirm || confirm("AVISO: Se você aplicar este preset, todas as suas personalizações serão perdidas. Continuar?")) {
-		presetMobileValues.checks.forEach(id => $(id).prop("checked", true));
-		for (id in presetMobileValues.values) { $(id).val(presetMobileValues.values[id]) }
-		resetForm();
+function applyPreset(presetName, skipConfirm = false) {
+	const preset = presets[presetName]
+	if (skipConfirm || confirm('AVISO: Se você aplicar este preset, todas as suas personalizações serão perdidas. Continuar?')) {
+		preset.checks.forEach(id => $(id).prop('checked', true))
+		for (id in preset.values) {
+			$(id).val(preset.values[id])
+		}
+		updateInputValues()
+		updatePreview()
 	}
 }
 
@@ -127,83 +116,3 @@ function copy(text) {
 	document.execCommand('copy');
 	document.body.removeChild(el);
 }
-
-defaultColors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688',
-	'#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722', '#795548', '#9e9e9e', '#607d8b',
-	'#ffffff', '#000000'
-]
-
-const bgColor = Pickr.create({
-	el: '#bgColor-picker',
-	theme: 'nano',
-	default: '#000000',
-	comparison: true,
-	swatches: defaultColors,
-	components: {
-		preview: true,
-		hue: true,
-		interaction: {
-			input: true,
-			save: true
-		}
-	},
-	strings: {
-		save: 'Salvar'
-	}
-});
-
-const nameColor = Pickr.create({
-	el: '#nameColor-picker',
-	theme: 'nano',
-	default: '#ffffff',
-	comparison: true,
-	swatches: defaultColors,
-	components: {
-		preview: true,
-		hue: true,
-		interaction: {
-			input: true,
-			save: true
-		}
-	},
-	strings: {
-		save: 'Salvar'
-	}
-});
-
-const counterColor = Pickr.create({
-	el: '#counterColor-picker',
-	theme: 'nano',
-	default: '#ffffff',
-	comparison: true,
-	swatches: defaultColors,
-	components: {
-		preview: true,
-		hue: true,
-		interaction: {
-			input: true,
-			save: true
-		}
-	},
-	strings: {
-		save: 'Salvar'
-	}
-});
-
-bgColor.on('save', function () {
-	$('#bgColor').val(bgColor.getColor().toHEXA().toString());
-	updateCode()
-	updatePreview()
-});
-
-nameColor.on('save', function () {
-	$('#nameColor').val(nameColor.getColor().toHEXA().toString());
-	updateCode()
-	updatePreview()
-});
-
-counterColor.on('save', function () {
-	$('#counterColor').val(counterColor.getColor().toHEXA().toString());
-	updateCode()
-	updatePreview()
-});
