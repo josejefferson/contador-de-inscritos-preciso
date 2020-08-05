@@ -8,42 +8,42 @@ $('.copycode').click(() => {
 
 const presets = {
 	'desktop': {
-		checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
+		checks: ['#bgTypeChanThumb', '#thumbPositionTop', '#thumbRadiusCircle'],
 		values: {
-			"#bgURL": "",
-			"#bgColor": "#000000",
-			"#bgOpacity": "50",
-			"#bgBlur": "15",
-			"#vignette": "0",
-			"#thumbSize": "200",
-			"#thumbMargin": "10",
-			"#nameSize": "50",
-			"#nameFont": "",
-			"#nameColor": "#ffffff",
-			"#counterSize": "120",
-			"#counterFont": "",
-			"#counterMargin": "100",
-			"#counterColor": "#ffffff"
+			'#bgURL': '',
+			'#bgColor': '#000000',
+			'#bgOpacity': '50',
+			'#bgBlur': '15',
+			'#vignette': '0',
+			'#thumbSize': '200',
+			'#thumbMargin': '10',
+			'#nameSize': '50',
+			'#nameFont': '',
+			'#nameColor': '#ffffff',
+			'#counterSize': '120',
+			'#counterFont': '',
+			'#counterMargin': '100',
+			'#counterColor': '#ffffff'
 		}
 	},
 	
 	'mobile': {
-		checks: ["#bgTypeChanThumb", "#thumbPositionTop", "#thumbRadiusCircle"],
+		checks: ['#bgTypeChanThumb', '#thumbPositionTop', '#thumbRadiusCircle'],
 		values: {
-			"#bgURL": "",
-			"#bgColor": "#000000",
-			"#bgOpacity": "50",
-			"#bgBlur": "15",
-			"#vignette": "0",
-			"#thumbSize": "150",
-			"#thumbMargin": "10",
-			"#nameSize": "30",
-			"#nameFont": "",
-			"#nameColor": "#ffffff",
-			"#counterSize": "50",
-			"#counterFont": "",
-			"#counterMargin": "30",
-			"#counterColor": "#ffffff"
+			'#bgURL': '',
+			'#bgColor': '#000000',
+			'#bgOpacity': '50',
+			'#bgBlur': '15',
+			'#vignette': '0',
+			'#thumbSize': '150',
+			'#thumbMargin': '10',
+			'#nameSize': '30',
+			'#nameFont': '',
+			'#nameColor': '#ffffff',
+			'#counterSize': '50',
+			'#counterFont': '',
+			'#counterMargin': '30',
+			'#counterColor': '#ffffff'
 		}
 	}
 }
@@ -105,7 +105,7 @@ function getOptions() {
 
 function getCode() {
 	const options = JSON.stringify(getOptions())
-	return `javascript:if("undefined"==typeof ytcountloaded)if("studio.youtube.com"==window.location.hostname){var info=${options};function loadScript(e){return new Promise(function(t,o){console.log("Loading script: "+e);let n=document.createElement("script");n.onload=t,n.onerror=o,n.src=e,document.getElementsByTagName("head")[0].appendChild(n)})}async function load(){document.head.innerHTML="",document.body.innerHTML="Aguarde...",await loadScript("https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"),await loadScript("https://cdn.jsdelivr.net/npm/js-sha1@0.6.0/src/sha1.min.js"),await loadScript("https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.js"),await loadScript("https://josejefferson.github.io/contador-de-inscritos-preciso/js/structure.js"),await loadScript("https://josejefferson.github.io/contador-de-inscritos-preciso/js/functions.js"),start()}load()}else confirm("Você não está no YouTube Studio.\\nDeseja ser redirecionado ao YouTube Studio?")&&(window.location.href="https://studio.youtube.com");else alert("O contador de inscritos já foi carregado\\nAtualize a página se quiser carregar novamente")`
+	return `javascript:if('undefined'==typeof ytcountloaded)if('studio.youtube.com'==window.location.hostname){var info=${options};function loadScript(e){return new Promise(function(t,o){console.log('Loading script: '+e);let n=document.createElement('script');n.onload=t,n.onerror=o,n.src=e,document.getElementsByTagName('head')[0].appendChild(n)})}async function load(){document.head.innerHTML='',document.body.innerHTML='Aguarde...',await loadScript('https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js'),await loadScript('https://cdn.jsdelivr.net/npm/js-sha1@0.6.0/src/sha1.min.js'),await loadScript('https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.js'),await loadScript('https://josejefferson.github.io/contador-de-inscritos-preciso/js/structure.js'),await loadScript('https://josejefferson.github.io/contador-de-inscritos-preciso/js/functions.js'),start()}load()}else confirm('Você não está no YouTube Studio.\\nDeseja ser redirecionado ao YouTube Studio?')&&(window.open('https://studio.youtube.com'));else alert('O contador de inscritos já foi carregado\\nAtualize a página se quiser carregar novamente')`
 }
 
 function updateCode() {
@@ -115,10 +115,10 @@ function updateCode() {
 }
 
 function copy(text) {
-	const el = document.createElement('textarea');
-	el.value = text;
-	document.body.appendChild(el);
-	el.select();
-	document.execCommand('copy');
-	document.body.removeChild(el);
+	const el = document.createElement('textarea')
+	el.value = text
+	document.body.appendChild(el)
+	el.select()
+	document.execCommand('copy')
+	document.body.removeChild(el)
 }

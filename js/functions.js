@@ -1,9 +1,9 @@
-const ytcountloaded = true;
-const defaultAPIKey = "QUl6YVN5RHBZQkxrdEh0QXpwcjRSTHBYb3V5SVBpSlViemlVODVj";
-var defaultTitle = document.title;
-var subsTimer;
-var googleAuthUser = 0;
-var error = false;
+const ytcountloaded = true
+const defaultAPIKey = 'QUl6YVN5RHBZQkxrdEh0QXpwcjRSTHBYb3V5SVBpSlViemlVODVj'
+let defaultTitle = document.title
+let subCounterTimer
+let googleAuthUser = 0
+let error = false
 
 if (typeof yt == 'undefined') {
 	showError('Ocorreu um problema ao receber dados do usuário', 'Se estiver no celular, verifique se você ativou a Versão para computador\nSe não, tente recarregar a página e aguardar o carregamento completo antes de iniciar o contador')
@@ -11,172 +11,172 @@ if (typeof yt == 'undefined') {
 }
 
 new Odometer({ el: document.querySelector('.odometer') })
-$('body').dblclick(fullscreen);
+$('body').dblclick(fullscreen)
 $('body').contextmenu(() => {
 	$('body').toggleClass('cursorHidden')
 	return false
-});
-$("#errorGetSubs").click(() => alert("Ocorreu um erro ao atualizar o contador de inscritos. Talvez o contador esteja desatualizado"));
+})
+$('#errorGetSubs').click(() => alert('Ocorreu um erro ao atualizar o contador de inscritos. Talvez o contador esteja desatualizado'))
 
 async function start() {
-	!error && repairParams();
-	!error && await getChannelData();
-	!error && writeSettings();
-	!error && startSubCounter();
+	!error && repairParams()
+	!error && await getChannelData()
+	!error && writeSettings()
+	!error && startSubCounter()
 }
 
 function repairParams() {
-	info.findChan = yt.config_.CHANNEL_ID;
-	!info.bgColor && (info.bgColor = "#000000");
-	!info.bgURL && (info.bgURL = "");
-	!info.bgOpacity && (info.bgOpacity = "50");
-	!info.bgBlur && (info.bgBlur = "15");
-	!info.vignette && (info.vignette = "0");
-	!info.thumbSize && (info.thumbSize = "200");
-	!info.thumbRadius && (info.thumbRadius = "50");
-	!info.thumbMargin && (info.thumbMargin = "10");
-	!info.nameSize && (info.nameSize = "50");
-	!info.counterSize && (info.counterSize = "120");
-	!info.nameFont && (info.nameFont = "");
-	!info.counterFont && (info.counterFont = "");
-	!info.counterMargin && (info.counterMargin = "100");
-	!info.nameColor && (info.nameColor = "#FFFFFF");
-	!info.counterColor && (info.counterColor = "#FFFFFF");
-	!info.apiKey && (info.apiKey = "")
-	!info.customCSS && (info.customCSS = "");
+	info.findChan = yt.config_.CHANNEL_ID
+	!info.bgColor && (info.bgColor = '#000000')
+	!info.bgURL && (info.bgURL = '')
+	!info.bgOpacity && (info.bgOpacity = '50')
+	!info.bgBlur && (info.bgBlur = '15')
+	!info.vignette && (info.vignette = '0')
+	!info.thumbSize && (info.thumbSize = '200')
+	!info.thumbRadius && (info.thumbRadius = '50')
+	!info.thumbMargin && (info.thumbMargin = '10')
+	!info.nameSize && (info.nameSize = '50')
+	!info.counterSize && (info.counterSize = '120')
+	!info.nameFont && (info.nameFont = '')
+	!info.counterFont && (info.counterFont = '')
+	!info.counterMargin && (info.counterMargin = '100')
+	!info.nameColor && (info.nameColor = '#FFFFFF')
+	!info.counterColor && (info.counterColor = '#FFFFFF')
+	!info.apiKey && (info.apiKey = '')
+	!info.customCSS && (info.customCSS = '')
 
-	!["solid", "url", "chanThumb"].includes(info.bgType) && (info.bgType = "chanThumb");
-	!["left", "top"].includes(info.thumbPosition) && (info.thumbPosition = "top");
+	!['solid', 'url', 'chanThumb'].includes(info.bgType) && (info.bgType = 'chanThumb')
+	!['left', 'top'].includes(info.thumbPosition) && (info.thumbPosition = 'top')
 }
 
 async function getChannelData() {
 	$('#loadingMessage').text('Procurando informações do canal')
 
 	await $.getJSON(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&id=${info.findChan}&key=${info.apiKey || atob(defaultAPIKey)}`, data => {
-		if (data["pageInfo"]["totalResults"] != 0) {
-			info.name = data['items'][0]['snippet']['title'];
-			info.chanThumb = data['items'][0]['snippet']['thumbnails']['medium']['url'];
+		if (data['pageInfo']['totalResults'] != 0) {
+			info.name = data['items'][0]['snippet']['title']
+			info.chanThumb = data['items'][0]['snippet']['thumbnails']['medium']['url']
 		} else {
-			showError("Não foi possível localizar o canal", "Tente verificar se você digitou o nome/nome de usuário/ID do canal corretamente");
+			showError('Não foi possível localizar o canal', 'Tente verificar se você digitou o nome/nome de usuário/ID do canal corretamente')
 		}
 	}).fail(err => {
-		err.status == "403" && showError(`Erro de autorização (${err.status} ${err.statusText})`, "O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua");
-		err.status != "403" && showError(`Erro ${err.status} ${err.statusText}`, "Sem detalhes sobre este erro");
+		err.status == '403' && showError(`Erro de autorização (${err.status} ${err.statusText})`, 'O YouTube limita a 10000 consultas ao seu servidor por dia\nTente inserir uma chave de API sua')
+		err.status != '403' && showError(`Erro ${err.status} ${err.statusText}`, 'Sem detalhes sobre este erro')
 	})
 }
 
 function writeSettings() {
-	defaultTitle = `Contador de inscritos de ${info.name}`;
-	document.title = defaultTitle;
-	$('link[rel="shortcut icon"]').attr('href', info.chanThumb || 'favicon.png');
-	$('.chanThumb').attr('src', info.chanThumb);
-	$('.name').text(info.name);
-	$('#chanDetails').addClass((info.thumbPosition == 'top') ? 'imgTop' : 'imgLeft');
-	$('body').css('background-color', info.bgColor);
-	$('#subCounterContainer').css('box-shadow', `inset 0 0 ${info.vignette}px #000`);
+	defaultTitle = `Contador de inscritos de ${info.name}`
+	document.title = defaultTitle
+	$('link[rel="shortcut icon"]').attr('href', info.chanThumb || 'favicon.png')
+	$('.chanThumb').attr('src', info.chanThumb)
+	$('.name').text(info.name)
+	$('#chanDetails').addClass((info.thumbPosition == 'top') ? 'imgTop' : 'imgLeft')
+	$('body').css('background-color', info.bgColor)
+	$('#subCounterContainer').css('box-shadow', `inset 0 0 ${info.vignette}px #000`)
 	$('#backgroundImage').css({
-		"background-color": info.bgColor,
-		"background-image": `url('${info.bgType == "url" ? info.bgURL : info.bgType == "chanThumb" && info.chanThumb}')`,
-		"filter": `blur(${info.bgBlur}px) opacity(${info.bgOpacity}%)`
-	});
-	$('.countContainer').css('margin-top', `${info.counterMargin}px`);
+		'background-color': info.bgColor,
+		'background-image': `url('${info.bgType == 'url' ? info.bgURL : info.bgType == 'chanThumb' && info.chanThumb}')`,
+		'filter': `blur(${info.bgBlur}px) opacity(${info.bgOpacity}%)`
+	})
+	$('.countContainer').css('margin-top', `${info.counterMargin}px`)
 	$('.odometer').css({
-		"color": info.counterColor,
-		"font-size": `${info.counterSize}px`,
-		"font-family": info.counterFont
-	});
+		'color': info.counterColor,
+		'font-size': `${info.counterSize}px`,
+		'font-family': info.counterFont
+	})
 	$('.chanThumb').css({
-		"border-radius": `${info.thumbRadius}%`,
-		"width": `${info.thumbSize}px`
-	});
-	$('.imgTop .chanThumb').css('margin-bottom', `${info.thumbMargin}px`);
-	$('.imgLeft .chanThumb').css('margin-right', `${info.thumbMargin}px`);
+		'border-radius': `${info.thumbRadius}%`,
+		'width': `${info.thumbSize}px`
+	})
+	$('.imgTop .chanThumb').css('margin-bottom', `${info.thumbMargin}px`)
+	$('.imgLeft .chanThumb').css('margin-right', `${info.thumbMargin}px`)
 	$('.name').css({
-		"color": info.nameColor,
-		"font-size": `${info.nameSize}px`,
-		"font-family": info.nameFont
-	});
-	$('head').append(`<style>${info.customCSS}</style>`);
+		'color': info.nameColor,
+		'font-size': `${info.nameSize}px`,
+		'font-family': info.nameFont
+	})
+	$('head').append(`<style>${info.customCSS}</style>`)
 }
 
 function startSubCounter() {
-	subCounterTimer = window.setTimeout(getSubs, 2000);
+	subCounterTimer = window.setTimeout(getSubs, 2000)
 }
 
 function stopSubCounter() {
-	clearTimeout(subCounterTimer);
+	clearTimeout(subCounterTimer)
 }
 
 async function getSubs() {
 	try {
 		$('#loadingMessage').text('Verificando número de inscritos do canal')
 		const resp = await fetch(`https://studio.youtube.com/youtubei/v1/creator/get_channel_dashboard?alt=json&key=${yt.config_.INNERTUBE_API_KEY}`, {
-			method: "POST",
+			method: 'POST',
 			headers: {
-				"X-Goog-Authuser": googleAuthUser,
-				"X-Origin": "https://studio.youtube.com",
+				'X-Goog-Authuser': googleAuthUser,
+				'X-Origin': 'https://studio.youtube.com',
 				Cookie: document.cookie,
 				Authorization: getAuth(),
-				"Content-Type": "application/json"
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(
 				{
-					"dashboardParams": {
-						"channelId": yt.config_.CHANNEL_ID,
-						"factsAnalyticsParams": {
-							"nodes": [
+					'dashboardParams': {
+						'channelId': yt.config_.CHANNEL_ID,
+						'factsAnalyticsParams': {
+							'nodes': [
 								{
-									"key": "DASHBOARD_FACT_ANALYTICS_LIFETIME_SUBSCRIBERS",
-									"value": {
-										"query": {
-											"dimensions": [],
-											"metrics": [
+									'key': 'DASHBOARD_FACT_ANALYTICS_LIFETIME_SUBSCRIBERS',
+									'value': {
+										'query': {
+											'dimensions': [],
+											'metrics': [
 												{
-													"type": "SUBSCRIBERS_NET_CHANGE"
+													'type': 'SUBSCRIBERS_NET_CHANGE'
 												}
 											],
-											"restricts": [
+											'restricts': [
 												{
-													"dimension": {
-														"type": "USER"
+													'dimension': {
+														'type': 'USER'
 													},
-													"inValues": [
+													'inValues': [
 														yt.config_.CHANNEL_ID
 													]
 												}
 											],
-											"orders": [],
-											"timeRange": {
-												"unboundedRange": {}
+											'orders': [],
+											'timeRange': {
+												'unboundedRange': {}
 											},
-											"currency": "BRL",
-											"returnDataInNewFormat": true,
-											"limitedToBatchedData": false
+											'currency': 'BRL',
+											'returnDataInNewFormat': true,
+											'limitedToBatchedData': false
 										}
 									}
 								}
 							]
 						},
-						"videoSnapshotAnalyticsParams": {
-							"nodes": [
+						'videoSnapshotAnalyticsParams': {
+							'nodes': [
 								{
-									"key": "VIDEO_SNAPSHOT_DATA_QUERY",
-									"value": {
-										"getVideoSnapshotData": {
-											"externalChannelId": yt.config_.CHANNEL_ID
+									'key': 'VIDEO_SNAPSHOT_DATA_QUERY',
+									'value': {
+										'getVideoSnapshotData': {
+											'externalChannelId': yt.config_.CHANNEL_ID
 										}
 									}
 								}
 							]
 						},
-						"cardProducerTimeout": "CARD_PRODUCER_TIMEOUT_SHORT"
+						'cardProducerTimeout': 'CARD_PRODUCER_TIMEOUT_SHORT'
 					},
-					"context": {
-						"client": {
-							"clientName": yt.config_.INNERTUBE_CONTEXT_CLIENT_NAME,
-							"clientVersion": yt.config_.INNERTUBE_CONTEXT_CLIENT_VERSION,
-							"hl": yt.config_.HL,
-							"gl": yt.config_.GL
+					'context': {
+						'client': {
+							'clientName': yt.config_.INNERTUBE_CONTEXT_CLIENT_NAME,
+							'clientVersion': yt.config_.INNERTUBE_CONTEXT_CLIENT_VERSION,
+							'hl': yt.config_.HL,
+							'gl': yt.config_.GL
 						}
 					}
 				}
@@ -219,25 +219,25 @@ function getCookie(name) {
 }
 
 function showError(text, details) {
-	error = true;
-	$("#loadingMessage").text(text).addClass("text-danger").click(() => {
-		alert(details);
-	});
-	$("#loadingSpinner").addClass("hidden");
-	$("#loadingError").removeClass("hidden");
-	$('#loadingScreen').fadeIn(200);
+	error = true
+	$('#loadingMessage').text(text).addClass('text-danger').click(() => {
+		alert(details)
+	})
+	$('#loadingSpinner').addClass('hidden')
+	$('#loadingError').removeClass('hidden')
+	$('#loadingScreen').fadeIn(200)
 }
 
 function fullscreen() {
-	var doc = window.document;
-	var docEl = doc.documentElement;
+	const doc = window.document
+	const docEl = doc.documentElement
 
-	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+	const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen
+	const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen
 
 	if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-		requestFullScreen.call(docEl);
+		requestFullScreen.call(docEl)
 	} else {
-		cancelFullScreen.call(doc);
+		cancelFullScreen.call(doc)
 	}
 }

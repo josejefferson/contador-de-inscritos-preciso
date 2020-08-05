@@ -44,7 +44,7 @@ if (typeof ytcountloaded == 'undefined') {
 		load()
 	} else {
 		if (confirm('Você não está no YouTube Studio.\nDeseja ser redirecionado ao YouTube Studio?'))
-			window.location.href = 'https://studio.youtube.com'
+			window.open('https://studio.youtube.com')
 	}
 } else {
 	alert('O contador de inscritos já foi carregado\nAtualize a página se quiser carregar novamente')
