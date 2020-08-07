@@ -1,4 +1,10 @@
-$(document).ready(updateCode)
+$(document).ready(() => {
+	updateCode()
+	if (window.innerWidth <= 768) {
+		applyPreset('mobile', true)
+		$('.bookmarklink').removeClass('animate__animated')
+	}
+})
 $('input, textarea').change(updateCode)
 $('.bookmarklink').click(e => e.preventDefault())
 $('.copycode').click(() => {
@@ -72,11 +78,6 @@ function applyPreset(presetName, skipConfirm = false) {
 		updateInputValues()
 		updatePreview()
 	}
-}
-
-if (window.innerWidth <= 768) {
-	applyPreset('mobile', true)
-	$('.bookmarklink').removeClass('animate__animated')
 }
 
 function getOptions() {
