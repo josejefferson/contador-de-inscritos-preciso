@@ -1,5 +1,6 @@
 if (typeof ytcountloaded == 'undefined') {
 	if (window.location.hostname == 'studio.youtube.com') {
+		const ytcountloaded = true
 		var info = {
 			bgType: 'chanThumb',
 			bgColor: '#000000',

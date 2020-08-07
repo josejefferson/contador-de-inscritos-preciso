@@ -1,4 +1,3 @@
-const ytcountloaded = true
 const defaultAPIKey = 'QUl6YVN5RHBZQkxrdEh0QXpwcjRSTHBYb3V5SVBpSlViemlVODVj'
 let defaultTitle = document.title
 let subCounterTimer
